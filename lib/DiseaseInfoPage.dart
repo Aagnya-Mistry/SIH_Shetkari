@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:sih_shetkari/HomePage.dart';
 import 'package:sih_shetkari/PreventionPage.dart';
 import 'package:sih_shetkari/Recommendations.dart';
-import 'package:sih_shetkari/TrackerPage.dart';
+import 'package:sih_shetkari/VoiceAssitant.dart';
 
 class Diseaseinfopage extends StatefulWidget {
   final File? imageFile;
@@ -21,7 +21,7 @@ class _DiseaseinfopageState extends State<Diseaseinfopage> {
     const HomePage(),
     Diseaseinfopage(),
     const Preventionpage(),
-    const Trackerpage(),
+    VoiceAssistantPage(),
     const Recommendations(),
   ];
 

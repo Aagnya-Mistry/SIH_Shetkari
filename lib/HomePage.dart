@@ -6,7 +6,8 @@ import 'package:sih_shetkari/HelpPage.dart';
 import 'package:sih_shetkari/PreventionPage.dart';
 import 'package:sih_shetkari/ProfilePage.dart';
 import 'package:sih_shetkari/Recommendations.dart';
-import 'package:sih_shetkari/TrackerPage.dart';
+import 'package:sih_shetkari/VoiceAssitant.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -33,19 +34,24 @@ class _HomePageState extends State<HomePage> {
       imageFile: null,
     ),
     const Preventionpage(),
-    const Trackerpage(),
+    VoiceAssistantPage(),
     const Recommendations(),
   ];
   final List<IconData> icons = [
     Icons.home,
     Icons.agriculture,
     Icons.medical_information,
-    Icons.calendar_month,
+    Icons.mic,
     Icons.recommend
   ];
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    if (localizations == null) {
+      return Text('Localization not available'); // Fallback text
+    }
+
     return Scaffold(
         body: Stack(
       children: [
@@ -112,15 +118,15 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(
                         height: 5,
                       ),
-                      const Text(
-                        'Welcome to',
+                      Text(
+                        localizations.welcome_head,
                         style: TextStyle(
                             fontSize: 35,
                             fontFamily: 'Merriweather',
                             color: Colors.white),
                       ),
-                      const Text(
-                        'Shetkari,',
+                      Text(
+                        localizations.shetkari,
                         style: TextStyle(
                             fontSize: 65,
                             fontFamily: 'Merriweather',
@@ -215,10 +221,10 @@ class _HomePageState extends State<HomePage> {
             ),
 
             //Description text
-            const SizedBox(
+            SizedBox(
               width: 350,
               child: Text(
-                "Your trusted companion in detecting and managing crop diseases, with real-time predictions, actionable insights, and expert advice to safeguard your fields and maximize yields.",
+                localizations.descrp,
                 style: TextStyle(
                   fontFamily: 'Mergeone',
                   fontSize: 14,
@@ -243,12 +249,12 @@ class _HomePageState extends State<HomePage> {
                     color: const Color(0xFF2A9F5D).withOpacity(0.5),
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(color: Colors.black54, width: 4)),
-                child: const Center(
+                child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Click or Upload a Picture",
+                        localizations.picture,
                         style: TextStyle(
                             fontFamily: "Merriweather",
                             fontSize: 20,
@@ -268,7 +274,7 @@ class _HomePageState extends State<HomePage> {
                             width: 10,
                           ),
                           Text(
-                            "or",
+                            localizations.or,
                             style: TextStyle(
                                 fontSize: 20,
                                 fontFamily: "Merriweather",

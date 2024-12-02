@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "783320712629",
+    "project_id": "shetkari-sih",
+    "storage_bucket": "shetkari-sih.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783320712629:android:dfa9dece318dae035585fc",
+        "android_client_info": {
+          "package_name": "com.example.sih_shetkari"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAq9yV7cKj81Vg5akbqudB7lZt5MSfAYE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

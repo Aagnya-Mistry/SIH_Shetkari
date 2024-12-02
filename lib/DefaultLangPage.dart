@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "package:sih_shetkari/LoginPage.dart";
-//import 'package:shetkari_sih/LoginPage.dart';
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 class Defaultlangpage extends StatefulWidget {
   const Defaultlangpage({super.key});
@@ -13,11 +13,12 @@ class _DefaultlangpageState extends State<Defaultlangpage> {
   String? _selectedLanguage = "English";
   // Default selected language
   final List<String> _languages = [
-    "Hindi",
     "English",
+    "Hindi",
     "Marathi",
     "Gujarati",
-    "Telugu"
+    "Telugu",
+    "Urdu"
   ];
 
   @override
@@ -61,21 +62,20 @@ class _DefaultlangpageState extends State<Defaultlangpage> {
 
             // Language Selection List
             Expanded(
-              child: ListView.builder(
-                itemCount: _languages.length,
-                itemBuilder: (context, index) {
-                  return Padding(
+              child: ListView(
+                children: [
+                  Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                     child: GestureDetector(
                       onTap: () {
                         setState(() {
-                          _selectedLanguage = _languages[index];
+                          _selectedLanguage = 'English'; // Hardcoded language
                         });
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: _selectedLanguage == _languages[index]
+                          color: _selectedLanguage == 'English'
                               ? Colors.green[100]
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(10),
@@ -85,31 +85,254 @@ class _DefaultlangpageState extends State<Defaultlangpage> {
                           ),
                         ),
                         child: ListTile(
-                          title: Text(
-                            _languages[index],
-                            style: const TextStyle(
+                          title: const Text(
+                            'English', // Hardcoded title
+                            style: TextStyle(
                               fontSize: 18,
                               fontFamily: 'Mergeone',
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           trailing: Radio<String>(
-                            value: _languages[index],
+                            value: 'English',
                             groupValue: _selectedLanguage,
                             activeColor: Colors.green,
                             onChanged: (value) {
                               setState(() {
-                                _selectedLanguage = value;
+                                _selectedLanguage = value!;
                               });
                             },
                           ),
                         ),
                       ),
                     ),
-                  );
-                },
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _selectedLanguage = 'Hindi'; // Hardcoded language
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: _selectedLanguage == 'Hindi'
+                              ? Colors.green[100]
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: Colors.green,
+                            width: 2,
+                          ),
+                        ),
+                        child: ListTile(
+                          title: const Text(
+                            'Hindi', // Hardcoded title
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'Mergeone',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          trailing: Radio<String>(
+                            value: 'Hindi',
+                            groupValue: _selectedLanguage,
+                            activeColor: Colors.green,
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedLanguage = value!;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _selectedLanguage = 'Marathi'; // Hardcoded language
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: _selectedLanguage == 'Marathi'
+                              ? Colors.green[100]
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: Colors.green,
+                            width: 2,
+                          ),
+                        ),
+                        child: ListTile(
+                          title: const Text(
+                            'Marathi', // Hardcoded title
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'Mergeone',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          trailing: Radio<String>(
+                            value: 'Marathi',
+                            groupValue: _selectedLanguage,
+                            activeColor: Colors.green,
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedLanguage = value!;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _selectedLanguage = 'Marathi'; // Hardcoded language
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: _selectedLanguage == 'Gujarati'
+                              ? Colors.green[100]
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: Colors.green,
+                            width: 2,
+                          ),
+                        ),
+                        child: ListTile(
+                          title: const Text(
+                            'Gujarati', // Hardcoded title
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'Mergeone',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          trailing: Radio<String>(
+                            value: 'Gujarati',
+                            groupValue: _selectedLanguage,
+                            activeColor: Colors.green,
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedLanguage = value!;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _selectedLanguage = 'Telugu'; // Hardcoded language
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: _selectedLanguage == 'Telugu'
+                              ? Colors.green[100]
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: Colors.green,
+                            width: 2,
+                          ),
+                        ),
+                        child: ListTile(
+                          title: const Text(
+                            'Telugu', // Hardcoded title
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'Mergeone',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          trailing: Radio<String>(
+                            value: 'Telugu',
+                            groupValue: _selectedLanguage,
+                            activeColor: Colors.green,
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedLanguage = value!;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
+
+            // Expanded(
+            //   child: ListView.builder(
+            //     itemCount: _languages.length,
+            //     itemBuilder: (context, index) {
+            //       return Padding(
+            //         padding:
+            //             const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            //         child: GestureDetector(
+            //           onTap: () {
+            //             setState(() {
+            //               _selectedLanguage = _languages[index];
+            //             });
+            //           },
+            //           child: Container(
+            //             decoration: BoxDecoration(
+            //               color: _selectedLanguage == _languages[index]
+            //                   ? Colors.green[100]
+            //                   : Colors.transparent,
+            //               borderRadius: BorderRadius.circular(10),
+            //               border: Border.all(
+            //                 color: Colors.green,
+            //                 width: 2,
+            //               ),
+            //             ),
+            //             child: ListTile(
+            //               title: Text(
+            //                 _languages[index],
+            //                 style: const TextStyle(
+            //                   fontSize: 18,
+            //                   fontFamily: 'Mergeone',
+            //                   fontWeight: FontWeight.w600,
+            //                 ),
+            //               ),
+            //               trailing: Radio<String>(
+            //                 value: _languages[index],
+            //                 groupValue: _selectedLanguage,
+            //                 activeColor: Colors.green,
+            //                 onChanged: (value) {
+            //                   setState(() {
+            //                     _selectedLanguage = value;
+            //                   });
+            //                 },
+            //               ),
+            //             ),
+            //           ),
+            //         ),
+            //       );
+            //     },
+            //   ),
+            // ),
             const SizedBox(height: 20),
 
             // Submit Button

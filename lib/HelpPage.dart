@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:sih_shetkari/HomePage.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Helppage extends StatefulWidget {
   @override
@@ -8,17 +9,12 @@ class Helppage extends StatefulWidget {
 }
 
 class _HelppageState extends State<Helppage> {
-  final List<Map<IconData, String>> desp = [
-    {Icons.home: "Home Page"},
-    {Icons.agriculture: "Disease Information Page"},
-    {Icons.medical_information: "Preventive Measures"},
-    {Icons.calendar_month: "Daily Tracker"},
-    {Icons.recommend: "Recommendations"},
-  ];
-
-  // const Helppage({super.key});
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    if (localizations == null) {
+      return Text('Localization not available'); // Fallback text
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey.withOpacity(0.5),
@@ -44,8 +40,8 @@ class _HelppageState extends State<Helppage> {
           children: [
             ListTile(
               leading: const Icon(Icons.phone, color: Colors.green),
-              title: const Text(
-                'Contact Us',
+              title: Text(
+                localizations.contact_us,
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -63,7 +59,7 @@ class _HelppageState extends State<Helppage> {
             const SizedBox(
               height: 15,
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
@@ -77,7 +73,7 @@ class _HelppageState extends State<Helppage> {
                   width: 20,
                 ),
                 Text(
-                  'Icon Description : ',
+                  localizations.icon_desp,
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -89,17 +85,30 @@ class _HelppageState extends State<Helppage> {
               height: 10,
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: desp.length,
-                itemBuilder: (context, index) {
-                  final iconData = desp[index].keys.first;
-                  final description =
-                      desp[index].values.first; // Fixed this line
-                  return ListTile(
-                    leading: Icon(iconData, color: Colors.green),
-                    title: Text(description),
-                  );
-                },
+              child: ListView(
+                children: [
+                  ListTile(
+                    leading: Icon(Icons.home, color: Color(0xFF2A9F5D)),
+                    title: Text(localizations.page1), // Hardcoded title
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.agriculture, color: Color(0xFF2A9F5D)),
+                    title: Text(localizations.page2), // Hardcoded title
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.medical_information,
+                        color: Color(0xFF2A9F5D)),
+                    title: Text(localizations.page3), // Hardcoded title
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.mic, color: Color(0xFF2A9F5D)),
+                    title: Text(localizations.page4), // Hardcoded title
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.recommend, color: Color(0xFF2A9F5D)),
+                    title: Text(localizations.page5), // Hardcoded title
+                  )
+                ],
               ),
             ),
           ],

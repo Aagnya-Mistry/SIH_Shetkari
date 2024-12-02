@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sih_shetkari/DiseaseInfoPage.dart';
 import 'package:sih_shetkari/HomePage.dart';
 import 'package:sih_shetkari/PreventionPage.dart';
-import 'package:sih_shetkari/TrackerPage.dart';
+import 'package:sih_shetkari/VoiceAssitant.dart';
 
 class Recommendations extends StatefulWidget {
   const Recommendations({super.key});
@@ -26,7 +26,7 @@ class _RecommendationsState extends State<Recommendations> {
     const HomePage(),
     Diseaseinfopage(),
     const Preventionpage(),
-    const Trackerpage(),
+    VoiceAssistantPage(),
     const Recommendations(),
   ];
   final List<IconData> icons = [

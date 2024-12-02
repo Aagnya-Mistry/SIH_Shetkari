@@ -1,11 +1,17 @@
 import "package:flutter/material.dart";
 import 'package:sih_shetkari/HomePage.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Slide1 extends StatelessWidget {
   const Slide1({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    if (localizations == null) {
+      return Text('Localization not available'); // Fallback text
+    }
+
     return Scaffold(
       body: Stack(
         children: [
@@ -22,11 +28,11 @@ class Slide1 extends StatelessWidget {
                   color: Colors.grey,
                 ),
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(left: 20, right: 20, top: 20),
                 child: Center(
                   child: Text(
-                    "Click a picture or upload an image of your crop to get detailed insights",
+                    localizations.slide1,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 20,
@@ -51,8 +57,8 @@ class Slide1 extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => const Slide6()),
                       );
                     },
-                    child: const Text(
-                      "Skip",
+                    child: Text(
+                      localizations.skip,
                       style: TextStyle(
                           fontFamily: "Mergeone",
                           fontSize: 20,
@@ -82,7 +88,7 @@ class Slide1 extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => const Slide2()),
                       );
                     },
-                    child: const Text("Next",
+                    child: Text(localizations.next,
                         style: TextStyle(
                             fontFamily: "Mergeone",
                             fontSize: 20,
@@ -103,6 +109,10 @@ class Slide2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    if (localizations == null) {
+      return Text('Localization not available'); // Fallback text
+    }
     return Scaffold(
       body: Stack(
         children: [
@@ -136,11 +146,11 @@ class Slide2 extends StatelessWidget {
                   color: Colors.grey,
                 ),
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(left: 20, right: 20, top: 20),
                 child: Center(
                   child: Text(
-                    "Disease identification and its cause",
+                    localizations.slide2,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 20,
@@ -165,8 +175,8 @@ class Slide2 extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => const Slide6()),
                       );
                     },
-                    child: const Text(
-                      "Skip",
+                    child: Text(
+                      localizations.skip,
                       style: TextStyle(
                           fontFamily: "Mergeone",
                           fontSize: 20,
@@ -196,7 +206,7 @@ class Slide2 extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => const Slide3()),
                       );
                     },
-                    child: const Text("Next",
+                    child: Text(localizations.next,
                         style: TextStyle(
                             fontFamily: "Mergeone",
                             fontSize: 20,
@@ -217,6 +227,10 @@ class Slide3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    if (localizations == null) {
+      return Text('Localization not available'); // Fallback text
+    }
     return Scaffold(
       body: Stack(
         children: [
@@ -233,11 +247,11 @@ class Slide3 extends StatelessWidget {
                   color: Colors.grey,
                 ),
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(left: 20, right: 20, top: 20),
                 child: Center(
                   child: Text(
-                    "Preventive measures and suggested medicines",
+                    localizations.slide3,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 20,
@@ -262,8 +276,8 @@ class Slide3 extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => const Slide6()),
                       );
                     },
-                    child: const Text(
-                      "Skip",
+                    child: Text(
+                      localizations.skip,
                       style: TextStyle(
                           fontFamily: "Mergeone",
                           fontSize: 20,
@@ -293,7 +307,7 @@ class Slide3 extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => const Slide4()),
                       );
                     },
-                    child: const Text("Next",
+                    child: Text(localizations.next,
                         style: TextStyle(
                             fontFamily: "Mergeone",
                             fontSize: 20,
@@ -314,6 +328,10 @@ class Slide4 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    if (localizations == null) {
+      return Text('Localization not available'); // Fallback text
+    }
     return Scaffold(
       body: Stack(
         children: [
@@ -330,11 +348,11 @@ class Slide4 extends StatelessWidget {
                   color: Colors.grey,
                 ),
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(left: 20, right: 20, top: 20),
                 child: Center(
                   child: Text(
-                    "Current weather conditions tailored to your region",
+                    localizations.slide4,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 20,
@@ -359,8 +377,8 @@ class Slide4 extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => const Slide6()),
                       );
                     },
-                    child: const Text(
-                      "Skip",
+                    child: Text(
+                      localizations.skip,
                       style: TextStyle(
                           fontFamily: "Mergeone",
                           fontSize: 20,
@@ -390,7 +408,7 @@ class Slide4 extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => const Slide5()),
                       );
                     },
-                    child: const Text("Next",
+                    child: Text(localizations.next,
                         style: TextStyle(
                             fontFamily: "Mergeone",
                             fontSize: 20,
@@ -411,6 +429,10 @@ class Slide5 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    if (localizations == null) {
+      return Text('Localization not available'); // Fallback text
+    }
     return Scaffold(
       body: Stack(
         children: [
@@ -427,11 +449,11 @@ class Slide5 extends StatelessWidget {
                   color: Colors.grey,
                 ),
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(left: 20, right: 20, top: 20),
                 child: Center(
                   child: Text(
-                    "Crop Recommendations",
+                    localizations.slide5,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 20,
@@ -457,8 +479,8 @@ class Slide5 extends StatelessWidget {
                             builder: (context) => const HomePage()),
                       );
                     },
-                    child: const Text(
-                      "Skip",
+                    child: Text(
+                      localizations.skip,
                       style: TextStyle(
                           fontFamily: "Mergeone",
                           fontSize: 20,
@@ -488,7 +510,7 @@ class Slide5 extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => const Slide6()),
                       );
                     },
-                    child: const Text("Next",
+                    child: Text(localizations.next,
                         style: TextStyle(
                             fontFamily: "Mergeone",
                             fontSize: 20,
@@ -509,6 +531,10 @@ class Slide6 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    if (localizations == null) {
+      return Text('Localization not available'); // Fallback text
+    }
     return Scaffold(
       body: Stack(
         children: [
@@ -525,11 +551,11 @@ class Slide6 extends StatelessWidget {
                   color: Colors.grey,
                 ),
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(left: 20, right: 20, top: 20),
                 child: Center(
                   child: Text(
-                    "Allow us to use your device location",
+                    localizations.slide6,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 20,
@@ -538,8 +564,6 @@ class Slide6 extends StatelessWidget {
                   ),
                 ),
               ),
-              const Text("Latitude:"),
-              const Text("Longitutde: ")
             ],
           ),
           Align(
@@ -578,7 +602,7 @@ class Slide6 extends StatelessWidget {
                               builder: (context) => const HomePage()),
                         );
                       },
-                      child: const Text("Accept",
+                      child: Text(localizations.accept,
                           style: TextStyle(
                               fontFamily: "Mergeone",
                               fontSize: 20,

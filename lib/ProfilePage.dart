@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sih_shetkari/LoginPage.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfilePage extends StatelessWidget {
   final Color greenColor = const Color(0xFF4CAF50);
@@ -8,6 +9,10 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    if (localizations == null) {
+      return Text('Localization not available'); // Fallback text
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[200],
@@ -18,9 +23,9 @@ class ProfilePage extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        title: const Center(
+        title: Center(
           child: Text(
-            "Profile",
+            localizations.profile,
             style: TextStyle(color: Colors.black),
           ),
         ),
@@ -107,7 +112,7 @@ class ProfilePage extends StatelessWidget {
             const SizedBox(height: 20),
             // Menu Options
             ListTile(
-              title: const Text("Edit Profile"),
+              title: Text(localizations.edit_pfp),
               trailing: const Icon(Icons.arrow_forward_ios),
               onTap: () {
                 // Navigate to Edit Profile Page
@@ -115,7 +120,7 @@ class ProfilePage extends StatelessWidget {
             ),
             const Divider(),
             ListTile(
-              title: const Text("History"),
+              title: Text(localizations.history),
               trailing: const Icon(Icons.arrow_forward_ios),
               onTap: () {
                 // Navigate to History Page
@@ -123,7 +128,7 @@ class ProfilePage extends StatelessWidget {
             ),
             const Divider(),
             ListTile(
-              title: const Text("Saved"),
+              title: Text(localizations.saved),
               trailing: const Icon(Icons.arrow_forward_ios),
               onTap: () {
                 // Navigate to Saved Page
@@ -150,7 +155,7 @@ class ProfilePage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
-              child: const Text("Sign Out"),
+              child: Text(localizations.signout),
             ),
           ],
         ),
