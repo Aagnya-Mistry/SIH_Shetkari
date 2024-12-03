@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'dart:io';
 import 'package:sih_shetkari/DiseaseInfoPage.dart';
 import 'package:sih_shetkari/HelpPage.dart';
+import 'package:sih_shetkari/Language_provider.dart';
 import 'package:sih_shetkari/PreventionPage.dart';
 import 'package:sih_shetkari/ProfilePage.dart';
-import 'package:sih_shetkari/Recommendations.dart';
+import 'package:sih_shetkari/FarmDetailsPage.dart';
 import 'package:sih_shetkari/VoiceAssitant.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -18,14 +20,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   XFile? imagefile;
-  final List<String> _languages = [
-    'English',
-    'Hindi',
-    'Marathi',
-    'Gujarati',
-    'Telugu'
-  ];
-  String? _selectedLanguage = 'English';
+  // final List<String> _languages = [
+  //   'English',
+  //   'Hindi',
+  //   'Marathi',
+  //   'Gujarati',
+  //   'Telugu'
+  // ];
+  // String? _selectedLanguage = 'English';
 
   int currentIndex = 0;
   final List<Widget> pages = [
@@ -35,7 +37,7 @@ class _HomePageState extends State<HomePage> {
     ),
     const Preventionpage(),
     VoiceAssistantPage(),
-    const Recommendations(),
+    FarmDetails(),
   ];
   final List<IconData> icons = [
     Icons.home,
@@ -152,33 +154,27 @@ class _HomePageState extends State<HomePage> {
                               ),
                               child: Row(
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: DropdownButton(
-                                      value: _selectedLanguage,
-                                      items: _languages
-                                          .map<DropdownMenuItem<String>>(
-                                              (String item) {
-                                        return DropdownMenuItem<String>(
-                                          value: item,
-                                          child: Text(
-                                            item,
-                                            style: const TextStyle(
-                                                fontSize: 18,
-                                                fontFamily: "Mergeone",
-                                                color: Color(0xFF1D4031)),
-                                          ),
-                                        );
-                                      }).toList(),
-                                      onChanged: (String? value) {
-                                        if (value != null) {
-                                          setState(() {
-                                            _selectedLanguage = value;
-                                          });
-                                        }
-                                      },
-                                      icon: const Icon(Icons.arrow_drop_down),
+                                  DropdownMenu(
+                                    textStyle: TextStyle(
+                                      fontSize: 18,
+                                      fontFamily: "Mergeone",
+                                      color: Color(0xFF1D4031),
                                     ),
+                                    initialSelection: Text(context
+                                        .watch<LanguageProvider>()
+                                        .selectedLocale
+                                        .languageCode),
+                                    onSelected: (value) {
+                                      context
+                                          .read<LanguageProvider>()
+                                          .changeLanguage(value as String);
+                                    },
+                                    dropdownMenuEntries: LanguageProvider
+                                        .languages
+                                        .map((language) => DropdownMenuEntry(
+                                            value: language['locale'],
+                                            label: language['name']))
+                                        .toList(),
                                   ),
                                   const SizedBox(
                                     width: 40,

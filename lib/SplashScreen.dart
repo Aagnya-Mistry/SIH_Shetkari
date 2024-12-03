@@ -1,25 +1,26 @@
 import 'dart:async';
-//import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
 import 'package:flutter/material.dart';
 import 'package:sih_shetkari/DefaultLangPage.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sih_shetkari/HomePage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sih_shetkari/LoginPage.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<SplashScreen> createState() => SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class SplashScreenState extends State<SplashScreen> {
+  static const String KEYLOGIN = "login";
+
   @override
   void initState() {
     super.initState();
 
-    Timer(const Duration(seconds: 5), () {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const Defaultlangpage()));
-    });
+    whereToNavigate();
   }
 
   @override
@@ -56,5 +57,26 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> whereToNavigate() async {
+    var sharedPref = await SharedPreferences.getInstance();
+
+    var isLoggedIn = sharedPref.getBool(KEYLOGIN);
+
+    Timer(const Duration(seconds: 3), () {
+      if (isLoggedIn != null) {
+        if (isLoggedIn) {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const HomePage()));
+        } else {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => Defaultlangpage()));
+        }
+      } else {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => Defaultlangpage()));
+      }
+    });
   }
 }

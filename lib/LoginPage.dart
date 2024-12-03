@@ -6,6 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sih_shetkari/SplashScreen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -19,9 +21,9 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  final Color greenColor = const Color(0xFF4CAF50);
+  final Color greenColor = const Color(0xFF2A9F5D);
   // Green for focused border and button
-  final Color lightGreenColor = const Color(0xFF2A9F5D).withOpacity(0.63);
+  final Color lightGreenColor = const Color(0xFF2A9F5D).withOpacity(0.25);
   // Lighter green for initial background
 
   String hashPassword(String password) {
@@ -61,8 +63,9 @@ class _LoginPageState extends State<LoginPage> {
           SnackBar(content: Text("Logged in successfully!")),
         );
 
-        // Perform navigation or app-specific actions here
-        // For example, navigate to a placeholder home screen:
+        var sharedPref = await SharedPreferences.getInstance();
+        sharedPref.setBool(SplashScreenState.KEYLOGIN, true);
+
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(

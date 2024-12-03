@@ -71,39 +71,6 @@ class _RecommendationsState extends State<Recommendations> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Container(
-            //   width: MediaQuery.of(context).size.width,
-            //   height: 80,
-            //   color: Colors.grey.withOpacity(0.5),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //     children: [
-            //     IconButton(
-            //         icon: Icon(Icons.arrow_back, color: Colors.black),
-            //         onPressed: () => Navigator.pop(context),
-            //     ),
-            //     Center(
-            //        child: Text(
-            //        "Recommendations",
-            //         style: TextStyle(
-            //         color: Colors.black,
-            //         fontSize: 20,
-            //         fontWeight: FontWeight.bold,
-            //           fontFamily: "Merriweather"
-            //         ),
-            //        ),
-            //      ),
-            //     IconButton(
-            //        icon: Icon(Icons.bookmark_border, color: Colors.black),
-            //        onPressed: () {
-            //        // Add bookmark functionality here
-            //        },
-            //     ),
-            //     ],
-            //   ),
-            // ),
-            // SizedBox(height: 20,),
-
             // Title Section
             const Text(
               "Suggestive Crops",
@@ -164,45 +131,6 @@ class _RecommendationsState extends State<Recommendations> {
                 },
               ),
             ),
-
-            // Description Text
-            const Center(
-              child: Text(
-                "Also, find out about the quantity of fertilizer required:",
-                style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: "Mergeone"),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            const SizedBox(height: 10),
-
-            // Calculate Fertilizer Button
-            ElevatedButton(
-              onPressed: () {
-                // Add fertilizer calculation logic here
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF2A9F5D),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              child: const Center(
-                child: Text(
-                  "Calculate Fertilizer",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "Merriweather"),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
 
             // Bottom Navigation Buttons
             Align(alignment: Alignment.bottomCenter, child: _navBar())

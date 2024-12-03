@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:sih_shetkari/HomePage.dart';
 import 'package:sih_shetkari/PreventionPage.dart';
-import 'package:sih_shetkari/Recommendations.dart';
+import 'package:sih_shetkari/FarmDetailsPage.dart';
 import 'package:sih_shetkari/VoiceAssitant.dart';
 
 class Diseaseinfopage extends StatefulWidget {
@@ -22,7 +22,7 @@ class _DiseaseinfopageState extends State<Diseaseinfopage> {
     Diseaseinfopage(),
     const Preventionpage(),
     VoiceAssistantPage(),
-    const Recommendations(),
+    FarmDetails(),
   ];
 
   final List<IconData> icons = [
