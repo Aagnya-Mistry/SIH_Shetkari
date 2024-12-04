@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +11,8 @@ import 'package:sih_shetkari/ProfilePage.dart';
 import 'package:sih_shetkari/FarmDetailsPage.dart';
 import 'package:sih_shetkari/VoiceAssitant.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sih_shetkari/services/cloudinary_services.dart';
+import 'package:sih_shetkari/models.dart/tflite_model_1.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,21 +22,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // ignore: unused_field
+  //FilePickerResult? _filePickerResult;
   XFile? imagefile;
-  // final List<String> _languages = [
-  //   'English',
-  //   'Hindi',
-  //   'Marathi',
-  //   'Gujarati',
-  //   'Telugu'
-  // ];
-  // String? _selectedLanguage = 'English';
-
   int currentIndex = 0;
   final List<Widget> pages = [
     const HomePage(),
     Diseaseinfopage(
-      imageFile: null,
+      imageURL:
+          "https://icons.veryicon.com/png/o/education-technology/alibaba-cloud-iot-business-department/image-load-failed.png",
+      prediction: "Disease Not Detected",
     ),
     const Preventionpage(),
     VoiceAssistantPage(),
@@ -237,6 +235,7 @@ class _HomePageState extends State<HomePage> {
             GestureDetector(
               onTap: () {
                 takeapicture();
+                //_openFilePicker();
               },
               child: Container(
                 width: 350,
@@ -313,6 +312,7 @@ class _HomePageState extends State<HomePage> {
               TextButton(
                   onPressed: () {
                     takefromcamera();
+                    Navigator.pop(context);
                   },
                   child: const Text(
                     "Camera",
@@ -321,6 +321,7 @@ class _HomePageState extends State<HomePage> {
               TextButton(
                   onPressed: () {
                     takefromgallery();
+                    Navigator.pop(context);
                   },
                   child: const Text(
                     "Gallery",
@@ -332,34 +333,84 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> takefromcamera() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.camera);
-    if (image != null) {
-      setState(() {
-        imagefile = image;
-      });
+    String? imageURL = await uploadToCloudinary(ImageSource.camera);
+    String? prediction = await TFLiteModel.predictDiseaseFromUrl(imageURL!);
+
+    if (imageURL != null && prediction != null) {
       Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Diseaseinfopage(imageFile: File(image.path)),
-          ));
+        context,
+        MaterialPageRoute(
+          builder: (context) => Diseaseinfopage(
+            imageURL: imageURL,
+            prediction: prediction,
+          ),
+        ),
+      );
+    } else {
+      print("Image upload or disease prediction failed");
     }
   }
 
   Future<void> takefromgallery() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      setState(() {
-        imagefile = image;
-      });
+    String? imageURL = await uploadToCloudinary(ImageSource.gallery);
+    String? prediction = await TFLiteModel.predictDiseaseFromUrl(imageURL!);
+
+    if (imageURL != null && prediction != null) {
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  Diseaseinfopage(imageFile: File(image.path))));
+        context,
+        MaterialPageRoute(
+          builder: (context) => Diseaseinfopage(
+            imageURL: imageURL,
+            prediction: prediction,
+          ),
+        ),
+      );
+    } else {
+      print("Image upload or disease prediction failed");
     }
   }
+
+  // Future<void> takefromcamera() async {
+  //   final ImagePicker picker = ImagePicker();
+  //   final XFile? image = await picker.pickImage(source: ImageSource.camera);
+  //   String? imageURL = await uploadToCloudinary(ImageSource.camera);
+  //   String prediction = await TFLiteModel.predictDisease(File(image!.path));
+
+  //   if (imageURL != null) {
+  //     Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (context) => Diseaseinfopage(
+  //           imageURL: imageURL,
+  //           prediction: prediction,
+  //         ),
+  //       ),
+  //     );
+  //   } else {
+  //     print("Image upload failed");
+  //   }
+  // }
+
+  // Future<void> takefromgallery() async {
+  //   final ImagePicker picker = ImagePicker();
+  //   final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+  //   String? imageURL = await uploadToCloudinary(ImageSource.gallery);
+  //   String prediction = await TFLiteModel.predictDisease(File(image!.path));
+
+  //   if (imageURL != null) {
+  //     Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (context) => Diseaseinfopage(
+  //           imageURL: imageURL,
+  //           prediction: prediction,
+  //         ),
+  //       ),
+  //     );
+  //   } else {
+  //     print("Image upload failed");
+  //   }
+  // }
 
   Widget _navBar() {
     return Container(
