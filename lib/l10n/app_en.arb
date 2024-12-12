@@ -40,5 +40,232 @@
     "page6" : "Recommendations",
     "page1_s1" : "About Disease",
     "page1_s2" : "Causes",
-    "page6_s1" : "Suggestive Crops"
+    "page6_s1" : "Suggestive Crops",
+
+    "apple" : "Apple",
+    "cotton" : "Cotton",
+    "cauliflower" : "Cauliflower",
+    "maize" : "Maize",
+    "pomegranate" : "Pomegranate",
+    "rice" : "Rice",
+    "sugarcane" : "Sugarcane",
+    "soyabean" : "Soyabean",
+    "spinach" : "Spinach",
+    "tomato" : "Tomato",
+    
+    "apple_scab": "Apple Scab",
+    "apple_scab_preventive": "Ensure proper spacing between plants for good air circulation\nApply fungicides like Mancozeb or Copper-based products.\nPrune affected areas and remove fallen leaves.\nPractice crop rotation to reduce disease spread.\nMaintain optimal watering practices to avoid excess moisture.",
+
+    "apple_black_rot": "Apple Black Rot",
+    "apple_black_rot_preventive": "Ensure proper spacing between plants for good air circulation\nApply fungicides like Mancozeb or Copper-based products.\nPrune affected areas and remove fallen leaves.\nPractice crop rotation to reduce disease spread.\nMaintain optimal watering practices to avoid excess moisture.",
+    
+    "apple_cedar_apple_rust": "Apple Cedar Apple Rust",
+    "apple_cedar_apple_rust_preventive": "Ensure proper spacing between plants for good air circulation\nApply fungicides like Mancozeb or Copper-based products.\nPrune affected areas and remove fallen leaves.\nPractice crop rotation to reduce disease spread.\nMaintain optimal watering practices to avoid excess moisture.",
+    
+    "apple_healthy": "Apple Healthy",
+    "apple_healthy_preventive": "Ensure proper plant care, proper watering, and nutrient management.\nRegularly inspect for pests or diseases.\nPractice crop rotation.",
+    
+    "rice_tungro": "Tungro",
+    "rice_tungro_preventive": "Use resistant rice varieties\nControl vector insects with pesticides.\nPractice field sanitation.\nAvoid excessive nitrogen fertilizers.",
+    
+    "rice_blast": "Rice Blast",
+    "rice_blast_preventive": "Apply fungicides like Pyricularia or Tricyclazole.\nRotate crops with non-host plants.\nUse resistant rice varieties.",
+    
+    "rice_brownspot": "Brownspot",
+    "rice_brownspot_preventive": "Remove infected rice plants.\nApply fungicides like Carbendazim.\nMaintain proper irrigation practices.",
+    
+    "rice_bacterial_blight": "Bacterial Blight",
+    "rice_bacterial_blight_preventive": "Use resistant varieties.\nAvoid overhead irrigation.\nUse clean seeds.",
+    
+    "sugarcane_yellow_rust": "Yellow Rust",
+    "sugarcane_yellow_rust_preventive": "Apply fungicides like Propiconazole.\nPractice crop rotation.\nRemove and destroy infected plant material.",
+    
+    "sugarcane_red_rot": "Red Rot",
+    "sugarcane_red_rot_preventive": "Use disease-free planting material.\nControl pest infestation.\nApply fungicides like Thiophanate-methyl.",
+    
+    "sugarcane_red_rust": "Red Rust",
+    "sugarcane_red_rust_preventive": "Control weed growth.\nUse resistant varieties.\nApply fungicides like Copper-based products.",
+    
+    "sugarcane_mosaic": "Mosaic",
+    "sugarcane_mosaic_preventive": "Use resistant varieties.\nControl aphids and other vector pests.\nPractice crop rotation.",
+    
+    "sugarcane_healthy": "Healthy Sugarcane",
+    "sugarcane_healthy_preventive": "Ensure optimal water and nutrient management.\nRegular pest monitoring and management.\nMaintain field sanitation.",
+    
+    "tomato_bacterial_spot": "Bacterial Spot",
+    "tomato_bacterial_spot_preventive": "Apply copper-based fungicides.\nAvoid overhead irrigation.\nPractice crop rotation.",
+    
+    "tomato_early_blight": "Early Blight",
+    "tomato_early_blight_preventive": "Apply fungicides like Chlorothalonil.\nRemove and destroy infected plant material.\nPractice crop rotation.",
+    
+    "tomato_late_blight": "Late Blight",
+    "tomato_late_blight_preventive": "Apply fungicides like Metalaxyl.\nPractice crop rotation.\nRemove infected plant material.",
+    
+    "tomato_leaf_mold": "Leaf Mold",
+    "tomato_leaf_mold_preventive": "Ensure proper spacing between plants.\nControl humidity levels in greenhouses.\nUse fungicides like Chlorothalonil.",
+    
+    "tomato_septoria_leaf_spot": "Septoria Leaf Spot",
+    "tomato_septoria_leaf_spot_preventive": "Use fungicides like Mancozeb.\nRemove infected plant material.\nPractice crop rotation.",
+    
+    "tomato_spider_mites": "Spider Mites (Two-Spotted Spider Mite)",
+    "tomato_spider_mites_preventive": "Use miticides.\nIncrease humidity to deter mites.\nRegularly monitor and remove infested plants.",
+    
+    "tomato_target_spot": "Target Spot",
+    "tomato_target_spot_preventive": "Apply fungicides like Pyraclostrobin.\nPractice proper irrigation techniques.\nRemove infected plant material.",
+    
+    "tomato_ytlcv": "Tomato Yellow Leaf Curl Virus (TYLCV)",
+    "tomato_ytlcv_preventive": "Control whitefly populations.\nUse resistant tomato varieties.\nRemove infected plants.",
+    
+    "tomato_healthy": "Tomato Healthy",
+    "tomato_healthy_preventive": "Ensure proper watering and fertilization.\nRegular pest and disease monitoring.\nPractice crop rotation.",
+    
+    "cotton_bacterial_blight": "Bacterial Blight",
+    "cotton_bacterial_blight_preventive": "Use resistant cotton varieties.\nRemove infected plant material.\nPractice crop rotation.",
+    
+    "cotton_aphid": "Cotton Aphid",
+    "cotton_aphid_preventive": "Use insecticides like Imidacloprid.\nControl aphid populations with natural predators.",
+    
+    "cotton_whitefly": "Cotton Whitefly",
+    "cotton_whitefly_preventive": "Use insecticides like Thiamethoxam.\nIntroduce natural predators like ladybugs.",
+    
+    "cotton_anthracnose": "Antracnose",
+    "cotton_anthracnose_preventive": "Apply fungicides like Chlorothalonil.\nPractice field sanitation.\nRemove and destroy infected plants.",
+    
+    "cotton_healthy": "Healthy Cotton",
+    "cotton_healthy_preventive": "Ensure proper water and nutrient management.\nRegular pest monitoring.\nUse disease-resistant varieties.",
+    
+    "cotton_red_cotton_bug": "Red Cotton Bug",
+    "cotton_red_cotton_bug_preventive": "Use insecticides like Malathion.\nEncourage natural predators.",
+    
+    "cauliflower_downy_mildew": "Downy Mildew",
+    "cauliflower_downy_mildew_preventive": "Apply fungicides like Metalaxyl.\nEnsure proper spacing between plants.\nRemove and destroy infected plant material.",
+    
+    "cauliflower_bacterial_spot_rot": "Bacterial spot rot",
+    "cauliflower_bacterial_spot_rot_preventive": "Use bactericides like Copper sulfate.\nPractice crop rotation.\nEnsure proper irrigation practices.",
+    
+    "cauliflower_black_rot": "Black rot",
+    "cauliflower_black_rot_preventive": "Apply fungicides like Chlorothalonil.\nRemove and destroy infected plant material.\nPractice field sanitation.",
+    
+    "cauliflower_healthy": "Healthy Cauliflower",
+    "cauliflower_healthy_preventive": "Ensure optimal water and nutrient management.\nRegular pest monitoring.\nPractice crop rotation.",
+    
+    "soybean_healthy": "Healthy Soybean",
+    "soybean_healthy_preventive": "Ensure proper soil nutrition.\nRegular pest monitoring.\nPractice crop rotation.",
+    
+    "soybean_caterpillar": "Caterpillar",
+    "soybean_caterpillar_preventive": "Use insecticides like Spinosad.\nControl caterpillar infestations with natural predators.",
+    
+    "soybean_diabrotica_speciosa": "Diabrotica Speciosa (Soybean)",
+    "soybean_diabrotica_speciosa_preventive": "Use insecticides like Thiamethoxam.\nPractice crop rotation.",
+    
+    "spinach_healthy": "Healthy Spinach",
+    "spinach_healthy_preventive": "Ensure optimal water and nutrient management.\nRegular pest monitoring.\nPractice crop rotation.",
+    
+    "spinach_anthracnose_leaf_spot": "Anthracnose leaf spot",
+    "spinach_anthracnose_leaf_spot_preventive": "Apply fungicides like Chlorothalonil.\nPractice crop rotation.\nRemove infected plant material.",
+    
+    "spinach_straw_mite": "Straw Mite",
+    "spinach_straw_mite_preventive": "Use miticides.\nIncrease humidity to deter mites.\nRemove infected plants.",
+    
+    "pomegranate_alternaria": "Alternaria",
+    "pomegranate_alternaria_preventive": "Ensure proper spacing between plants for good air circulation\nApply fungicides like Mancozeb or Copper-based products.\nPrune affected areas and remove fallen leaves.\nPractice crop rotation to reduce disease spread.\nMaintain optimal watering practices to avoid excess moisture.",
+    
+    "pomegranate_anthracnose": "Anthracnose",
+    "pomegranate_anthracnose_preventive": "Use fungicides like Copper-based products.\nPrune affected areas and remove fallen leaves.\nPractice crop rotation.",
+    
+    "pomegranate_cercospora": "Cercospora",
+    "pomegranate_cercospora_preventive": "Apply fungicides like Mancozeb.\nPractice crop rotation.\nRemove and destroy infected plant material.",
+    
+    "pomegranate_bacterial_blight": "Bacterial blight",
+    "pomegranate_bacterial_blight_preventive": "Use resistant varieties.\nPractice proper irrigation.\nRemove infected plants.",
+    
+    "pomegranate_healthy": "Healthy",
+    "pomegranate_healthy_preventive": "Ensure optimal water and nutrient management.\nRegular pest monitoring.\nPractice crop rotation.",
+    
+    "maize_cercospora_leaf_spot": "Cercospora Leaf Spot gray leaf",
+    "maize_cercospora_leaf_spot_preventive": "Use fungicides like Mancozeb.\nPractice crop rotation.\nRemove and destroy infected plant material.",
+    
+    "maize_common_rust": "Common Rust",
+    "maize_common_rust_preventive": "Apply fungicides like Chlorothalonil.\nPractice crop rotation.\nRemove and destroy infected plant material.",
+    
+    "maize_healthy": "Healthy",
+    "maize_healthy_preventive": "Ensure optimal water and nutrient management.\nRegular pest monitoring.\nPractice crop rotation.",
+    
+    "maize_northern_leaf_blight": "Northern Leaf Blight",
+    "maize_northern_leaf_blight_preventive": "Apply fungicides like Propiconazole.\nPractice field sanitation.\nRemove infected plant material.",
+
+    "yojna_no_1_name" : "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+    "yojna_no_1_desc" : "Provides income support to small and marginal farmers by transferring Rs. 6,000 annually directly into their bank accounts in three installments of Rs. 2,000 each. This scheme helps farmers manage agricultural inputs, household expenses, and unforeseen needs. The direct benefit transfer mechanism ensures transparency and efficiency, eliminating middlemen and delays. It provides much-needed financial relief to farmers, enabling them to sustain their livelihoods and invest in better agricultural practices.",
+
+    "yojna_no_2_name" : "Pradhan Mantri Fasal Bima Yojana (PMFBY)",
+    "yojna_no_2_desc": "Offers comprehensive insurance coverage to protect crops against natural calamities such as floods, droughts, pests, and diseases. Farmers pay a nominal premium, and the government subsidizes the rest, reducing the financial burden. This scheme ensures stability for farmers in the face of unpredictable weather and crop failures. Timely claim settlements allow farmers to recover losses and reinvest in their fields. It promotes risk management and encourages adoption of advanced farming techniques.",
+    
+    "yojna_no_3_name" : "Soil Health Card Scheme",
+    "yojna_no_3_desc":  "Provides farmers with a soil health card that details the nutrient status and fertility of their land. The scheme aims to educate farmers about the appropriate use of fertilizers and nutrients to improve productivity. It promotes balanced nutrient management, reducing the overuse of chemicals and maintaining soil health. By understanding their soil’s specific needs, farmers can lower input costs and achieve better yields. This initiative ensures sustainable farming and long-term agricultural benefits.",
+    
+    "yojna_no_4_name" : "Kisan Credit Card (KCC)",
+    "yojna_no_4_desc" : "The Kisan Credit Card provides farmers with easy and affordable access to credit for agricultural needs such as seeds, fertilizers, equipment, and irrigation. With low-interest rates and flexible repayment terms, it minimizes financial stress for farmers. The scheme also covers allied agricultural activities and post-harvest expenses. It empowers farmers to focus on increasing productivity rather than worrying about funding their operations, ensuring financial inclusion and security for millions of farming families.",
+
+    "yojna_no_5_name": "Pradhan Mantri Krishi Sinchai Yojana (PMKSY)",
+    "yojna_no_5_desc": "This scheme aims to improve irrigation and water use efficiency. It promotes initiatives like micro-irrigation, rainwater harvesting, and watershed management to ensure water availability for every farm. By reducing dependency on rainfall, it enables farmers to cultivate more land and increase crop yields. The scheme encourages sustainable water practices and conservation, helping farmers manage resources effectively. PMKSY ensures that irrigation reaches even the most remote areas, improving productivity and livelihoods.",
+    
+    "yojna_no_6_name": "Rashtriya Krishi Vikas Yojana (RKVY)",
+    "yojna_no_6_desc": "Supports state-specific agricultural projects to improve productivity and address local challenges. The scheme funds infrastructure development, modern technology adoption, and training programs to empower farmers. It encourages diversification into high-value crops, horticulture, and allied activities like fisheries and dairying. By focusing on state priorities, the scheme ensures efficient utilization of resources and boosts farmers' incomes. It promotes innovation and infrastructure development, helping farmers achieve higher returns and sustainable growth.",
+    
+    "yojna_no_7_name": "National Agriculture Market (eNAM)",
+    "yojna_no_7_desc": "A digital trading platform that connects farmers to buyers across the country, enabling better price discovery and reducing reliance on middlemen. Farmers can sell their produce in distant markets without additional costs. eNAM integrates local mandis, creating a unified national market for agricultural produce. The platform offers transparency, fair pricing, and convenience, helping farmers maximize profits. It also supports quality grading and storage facilities, ensuring a seamless and efficient trade process.",
+    
+    "yojna_no_8_name": "Paramparagat Krishi Vikas Yojana (PKVY)",
+    "yojna_no_8_desc": "Promotes organic farming by providing financial support and training to farmers. The scheme encourages the use of bio-fertilizers, compost, and eco-friendly farming practices. It helps farmers obtain organic certification, allowing them to access premium markets and earn higher profits. By reducing dependency on chemical inputs, it ensures healthier produce, lowers production costs, and improves soil health. PKVY supports sustainable agricultural practices, benefiting both farmers and the environment.",
+    
+    "yojna_no_9_name": "Interest Subvention Scheme for Farmers",
+    "yojna_no_9_desc": "Provides short-term agricultural loans at subsidized interest rates, making credit more affordable for farmers. Those who repay their loans on time receive additional rebates, further reducing borrowing costs. The scheme ensures that farmers have timely access to funds for seeds, fertilizers, equipment, and other needs. By minimizing financial stress, it supports farmers in managing their expenses and increasing productivity. The scheme plays a crucial role in stabilizing farmers’ income and promoting growth.",
+    
+    "yojna_no_10_name": "Fertilizer Subsidy Scheme",
+    "yojna_no_10_desc": "Ensures that fertilizers are available to farmers at subsidized rates, reducing input costs and promoting balanced nutrient use. The scheme encourages the timely application of fertilizers to improve soil health and crop yields. By lowering expenses, it helps farmers achieve higher profitability while maintaining sustainability. The subsidy system prevents overuse of chemical inputs and ensures the availability of essential nutrients for healthy crop growth, supporting long-term agricultural success.",
+    
+    "yojna_no_11_name": "National Food Security Mission (NFSM)",
+    "yojna_no_11_desc": "Focuses on increasing the production of rice, wheat, pulses, and coarse cereals by providing quality inputs, financial support, and training. The scheme promotes efficient farming techniques, mechanization, and water management. By improving productivity and reducing production costs, it ensures food security for the nation. Farmers benefit from better yields and steady income. The mission also encourages crop diversification and resilience, addressing the challenges of climate change and market demands.",
+    
+    "yojna_no_12_name": "Gramin Bhandaran Yojana",
+    "yojna_no_12_desc": "Supports farmers in constructing rural godowns to store their produce safely. Proper storage facilities reduce post-harvest losses and enable farmers to sell their crops when market prices are favorable. The scheme provides financial assistance and technical support for infrastructure development. By improving storage capacity, it enhances the agricultural value chain, increases farmers’ profitability, and ensures the availability of quality produce in the market throughout the year.",
+    
+    "yojna_no_13_name": "Pradhan Mantri Kisan MaanDhan Yojana (PM-KMY)",
+    "yojna_no_13_desc": "Provides a monthly pension of Rs. 3,000 to small and marginal farmers after the age of 60. Farmers contribute a nominal amount during their working years, matched by the government. The scheme ensures financial security in old age, allowing farmers to live a dignified life without financial worries. By addressing post-retirement needs, it brings peace of mind to farmers who have dedicated their lives to feeding the nation.",
+    
+    "yojna_no_14_name": "Digital Agriculture Mission",
+    "yojna_no_14_desc": "Uses technology to improve farming practices. Tools like weather updates, geospatial analytics, and crop recommendations help farmers make better decisions. It streamlines farming processes, increases efficiency, and reduces risks. The mission empowers farmers with modern technology, ensuring better productivity and profitability.",
+    
+    "yojna_no_15_name": "Crop Science for Food and Nutritional Security",
+    "yojna_no_15_desc": "Focuses on developing resilient crops that can withstand adverse conditions like droughts and floods. The scheme promotes research, advanced agricultural techniques, and access to improved seeds. By ensuring stable yields, it enhances food security and supports farmers in managing environmental challenges.",
+    
+    "yojna_no_16_name": "Sustainable Development of Horticulture",
+    "yojna_no_16_desc": "Encourages farmers to grow high-value crops like fruits, vegetables, and flowers. The scheme provides financial and technical support to adopt modern cultivation methods, improving yields and profitability. It diversifies income sources for farmers, ensuring better economic stability.",
+    
+    "yojna_no_17_name": "Formation and Promotion of 10,000 Farmer Producer Organizations (FPOs)",
+    "yojna_no_17_desc": "Encourages farmers to form groups for collective marketing, bargaining, and resource sharing. FPOs provide training, financial assistance, and market access, improving farmers’ incomes. The scheme strengthens farmers' negotiating power in agricultural markets, ensuring better profitability.",
+    
+    "yojna_no_18_name": "Agriculture Infrastructure Fund (AIF)",
+    "yojna_no_18_desc": "Provides loans to farmers for building post-harvest infrastructure like cold storage and warehouses. These facilities reduce wastage and allow farmers to store their produce until market prices improve. The scheme ensures better profitability and strengthens the agricultural value chain.",
+    
+    "yojna_no_19_name": "Market Intervention Scheme and Price Support Scheme (MIS-PSS)",
+    "yojna_no_19_desc": "Protects farmers from losses during periods of oversupply by ensuring fair prices for their crops. The scheme stabilizes market rates and prevents distress sales, providing a safety net for farmers and ensuring steady income.",
+
+    "page_3" : "Recommender",
+    "enter_farm_details" : "Enter your farm details for us to help recommend some crops for the next season:",
+    "n_content" : "Nitrogen (N) Content",
+    "p_content" : "Phosphorus (P) Content",
+    "k_content" : "Potassium (K) Conetnt",
+    "temp" : "Temperature (°C)",
+    "humidity" : "Humidity (%)",
+    "soil_ph" : "Soil pH",
+    "rain" : "Rainfall (mm)",
+    "get_recommend" : "Get Recommendations",
+    "page_4" : "Voice Assistant",
+    "enter_a_text" : "Type a message...",
+    "recommended" : "Recommended Crop",
+    "page_5" : "Preventive Measures",
+    "selection" : "Select a crop",
+    "deafult_page_5" : "Please select a crop to view diseases.",
+    "page_6" : "Government Schemas"
 }

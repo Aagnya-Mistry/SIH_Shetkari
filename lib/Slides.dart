@@ -54,7 +54,7 @@ class Slide1 extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const Slide6()),
+                        MaterialPageRoute(builder: (context) => Slide6()),
                       );
                     },
                     child: Text(
@@ -172,7 +172,7 @@ class Slide2 extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => const Slide6()),
+                        MaterialPageRoute(builder: (context) => Slide6()),
                       );
                     },
                     child: Text(
@@ -273,7 +273,7 @@ class Slide3 extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const Slide6()),
+                        MaterialPageRoute(builder: (context) => Slide6()),
                       );
                     },
                     child: Text(
@@ -374,7 +374,7 @@ class Slide4 extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const Slide6()),
+                        MaterialPageRoute(builder: (context) => Slide6()),
                       );
                     },
                     child: Text(
@@ -507,7 +507,7 @@ class Slide5 extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const Slide6()),
+                        MaterialPageRoute(builder: (context) => Slide6()),
                       );
                     },
                     child: Text(localizations.next,
@@ -526,8 +526,24 @@ class Slide5 extends StatelessWidget {
   }
 }
 
-class Slide6 extends StatelessWidget {
-  const Slide6({super.key});
+String location = "";
+
+class Slide6 extends StatefulWidget {
+  @override
+  State<Slide6> createState() => _Slide6State();
+}
+
+class _Slide6State extends State<Slide6> {
+  final TextEditingController _locationController = TextEditingController();
+
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void dispose() {
+    _locationController.dispose();
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -546,10 +562,18 @@ class Slide6 extends StatelessWidget {
               ),
               Center(
                 child: Container(
-                  width: 250,
-                  height: 250,
-                  color: Colors.grey,
-                ),
+                    child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: TextField(
+                    controller: _locationController,
+                    decoration: InputDecoration(
+                      hintText: 'Enter your location',
+                      border: OutlineInputBorder(),
+                      prefixIcon: const Icon(Icons.location_on),
+                    ),
+                    onChanged: (value) => location = value,
+                  ),
+                )),
               ),
               Padding(
                 padding: EdgeInsets.only(left: 20, right: 20, top: 20),
@@ -596,6 +620,17 @@ class Slide6 extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 10),
                     child: TextButton(
                       onPressed: () {
+                        final location = _locationController.text;
+                        if (location.isNotEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Your location: $location')),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Please enter a location.')),
+                          );
+                        }
                         Navigator.push(
                           context,
                           MaterialPageRoute(

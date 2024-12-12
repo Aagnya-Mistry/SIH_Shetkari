@@ -25,10 +25,8 @@ class _RecommendationsState extends State<Recommendations> {
   final List<Widget> pages = [
     const HomePage(),
     Diseaseinfopage(
-      imageURL:
-          "https://icons.veryicon.com/png/o/education-technology/alibaba-cloud-iot-business-department/image-load-failed.png",
-      prediction: "Disease Not Detected",
-    ),
+        imageURL:
+            "https://icons.veryicon.com/png/o/education-technology/alibaba-cloud-iot-business-department/image-load-failed.png"),
     const Preventionpage(),
     VoiceAssistantPage(),
     const Recommendations(),
