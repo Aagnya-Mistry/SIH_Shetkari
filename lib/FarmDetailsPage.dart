@@ -26,8 +26,6 @@ class _FarmDetailsState extends State<FarmDetails> {
   final TextEditingController _rainfallController = TextEditingController();
 
   String _predictedCrop = '';
-  String _recommendedFertilizer = '';
-  bool showRecommendations = false;
 
   // Crop mapping (predicted number -> crop name)
   final Map<int, String> cropMapping = {
@@ -55,74 +53,37 @@ class _FarmDetailsState extends State<FarmDetails> {
     21: 'Watermelon'
   };
 
-  Future<void> _getCropRecommendation() async {
-    final String cropApiUrl =
+  Future<void> _getRecommendation() async {
+    final String apiUrl =
         'http://192.168.187.59:5000/recommend-crop'; // Replace with your Flask server IP
 
     final response = await http.post(
-      Uri.parse(cropApiUrl),
+      Uri.parse(apiUrl),
       headers: {'Content-Type': 'application/json'},
       body: json.encode({
-        'nitrogen': nitrogen,
-        'phosphorus': phosphorus,
-        'potassium': potassium,
-        'temperature': temperature,
-        'humidity': humidity,
-        'ph': soilPh,
-        'rainfall': rainfall,
+        'nitrogen': _nitrogenController.text,
+        'phosphorus': _phosphorusController.text,
+        'potassium': _potassiumController.text,
+        'temperature': _temperatureController.text,
+        'humidity': _humidityController.text,
+        'ph': _phController.text,
+        'rainfall': _rainfallController.text,
       }),
     );
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       setState(() {
+        // Convert the numeric prediction to crop name
         int predictedCropNum = data['crop'];
-        _predictedCrop = cropMapping[predictedCropNum] ?? 'Unknown Crop';
+        _predictedCrop = cropMapping[predictedCropNum] ??
+            'Unknown Crop'; // Fallback to 'Unknown Crop' if the number is not mapped
       });
     } else {
       setState(() {
-        _predictedCrop = 'Error: Unable to fetch crop recommendation';
+        _predictedCrop = 'Error: Unable to fetch recommendation';
       });
     }
-  }
-
-  Future<void> _getFertilizerRecommendation() async {
-    final String fertilizerApiUrl =
-        'http://192.168.187.59:5000/recommend-fertilizer'; // Replace with your Flask server IP
-
-    final response = await http.post(
-      Uri.parse(fertilizerApiUrl),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode({
-        'nitrogen': nitrogen,
-        'phosphorus': phosphorus,
-        'potassium': potassium,
-        'temperature': temperature,
-        'humidity': humidity,
-        'ph': soilPh,
-        'rainfall': rainfall,
-      }),
-    );
-
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      setState(() {
-        _recommendedFertilizer = data['fertilizer'] ?? 'Unknown Fertilizer';
-      });
-    } else {
-      setState(() {
-        _recommendedFertilizer =
-            'Error: Unable to fetch fertilizer recommendation';
-      });
-    }
-  }
-
-  Future<void> _getRecommendations() async {
-    setState(() {
-      _predictedCrop = 'Sample Crop';
-      _recommendedFertilizer = 'Sample Fertilizer';
-      showRecommendations = true; // Force UI update
-    });
   }
 
   @override
@@ -131,7 +92,6 @@ class _FarmDetailsState extends State<FarmDetails> {
     if (localizations == null) {
       return Text('Localization not available'); // Fallback text
     }
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey.withOpacity(0.5),
@@ -142,20 +102,23 @@ class _FarmDetailsState extends State<FarmDetails> {
           },
         ),
         title: Text(
-          localizations.page_3,
+          localizations.page3,
           style: TextStyle(
               color: Colors.black,
               fontSize: 20,
               fontWeight: FontWeight.bold,
               fontFamily: "Merriweather"),
         ),
+        //elevation: 0,
       ),
       body: SingleChildScrollView(
+        // Enables scrolling
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              //image and title
               Center(
                 child: Image.asset(
                   'assets/images/fertilizer.png',
@@ -170,84 +133,191 @@ class _FarmDetailsState extends State<FarmDetails> {
                     fontWeight: FontWeight.bold,
                     fontFamily: "Mergeone"),
               ),
+
+              //N content
               SizedBox(height: 10),
-              // Input fields
-              ..._buildInputFields(),
+              TextField(
+                controller: _nitrogenController,
+                decoration: InputDecoration(
+                  labelText: localizations.n_content,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                ),
+                keyboardType: TextInputType.number,
+                onChanged: (value) => nitrogen = value,
+              ),
+
+              //P content
               SizedBox(height: 10),
+              TextField(
+                controller: _phosphorusController,
+                decoration: InputDecoration(
+                  labelText: localizations.p_content,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                ),
+                keyboardType: TextInputType.number,
+                onChanged: (value) => phosphorus = value,
+              ),
+
+              //K content
+              SizedBox(height: 10),
+              TextField(
+                controller: _potassiumController,
+                decoration: InputDecoration(
+                  labelText: localizations.k_content,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                ),
+                keyboardType: TextInputType.number,
+                onChanged: (value) => potassium = value,
+              ),
+
+              //Temperature in (degree centigrade)
+              SizedBox(height: 10),
+              TextField(
+                controller: _temperatureController,
+                decoration: InputDecoration(
+                  labelText: localizations.temp,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                ),
+                keyboardType: TextInputType.number,
+                onChanged: (value) => temperature = value,
+              ),
+
+              //Humidity(%)
+              SizedBox(height: 10),
+              TextField(
+                controller: _humidityController,
+                decoration: InputDecoration(
+                  labelText: localizations.humidity,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                ),
+                keyboardType: TextInputType.number,
+                onChanged: (value) => humidity = value,
+              ),
+
+              //Soil ph
+              SizedBox(height: 10),
+              TextField(
+                controller: _phController,
+                decoration: InputDecoration(
+                  labelText: localizations.soil_ph,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                ),
+                keyboardType: TextInputType.number,
+                onChanged: (value) => soilPh = value,
+              ),
+
+              //Rainfall
+              SizedBox(height: 10),
+              TextField(
+                controller: _rainfallController,
+                decoration: InputDecoration(
+                  labelText: localizations.rain,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.green),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                ),
+                keyboardType: TextInputType.number,
+                onChanged: (value) => rainfall = value,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              //Submit button
               Center(
                 child: ElevatedButton(
-                  onPressed: _getRecommendations,
+                  onPressed: () {
+                    _getRecommendation();
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                   ),
                   child: Text(
                     localizations.get_recommend,
-                    style: TextStyle(fontSize: 16, color: Colors.white),
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontFamily: "Merriweather"),
                   ),
                 ),
               ),
-              SizedBox(height: 20),
-              if (showRecommendations) ...[
-                Text(
-                  localizations.recommended + ": $_predictedCrop",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'Recommended Fertilizer: $_recommendedFertilizer',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ]
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                localizations.recommended + ": $_predictedCrop",
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Merriweather"),
+              ),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  List<Widget> _buildInputFields() {
-    return [
-      _buildTextField(AppLocalizations.of(context)!.n_content,
-          _nitrogenController, (value) => nitrogen = value),
-      _buildTextField(AppLocalizations.of(context)!.p_content,
-          _phosphorusController, (value) => phosphorus = value),
-      _buildTextField(AppLocalizations.of(context)!.k_content,
-          _potassiumController, (value) => potassium = value),
-      _buildTextField(AppLocalizations.of(context)!.temp,
-          _temperatureController, (value) => temperature = value),
-      _buildTextField(AppLocalizations.of(context)!.humidity,
-          _humidityController, (value) => humidity = value),
-      _buildTextField(AppLocalizations.of(context)!.soil_ph, _phController,
-          (value) => soilPh = value),
-      _buildTextField(AppLocalizations.of(context)!.rain, _rainfallController,
-          (value) => rainfall = value),
-    ];
-  }
-
-  Widget _buildTextField(String label, TextEditingController controller,
-      Function(String) onChanged) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: TextField(
-        controller: controller,
-        decoration: InputDecoration(
-          labelText: label,
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.green),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.green),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        ),
-        keyboardType: TextInputType.number,
-        onChanged: onChanged,
       ),
     );
   }

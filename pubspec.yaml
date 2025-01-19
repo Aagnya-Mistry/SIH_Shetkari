@@ -59,6 +59,7 @@ dependencies:
   just_audio: ^0.9.42
   file_picker: ^8.1.4
   flutter_sound: ^9.2.13
+  fl_chart: ^0.69.2
 
 dev_dependencies:
   flutter_test:

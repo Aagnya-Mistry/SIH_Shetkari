@@ -51,71 +51,53 @@ class _PreventionpageState extends State<Preventionpage> {
           ),
         ],
       ),
-      body: Stack(
+      body: Column(
         children: [
-          Column(
-            children: [
-              DropdownButton<String>(
-                value: selectedCrop,
-                hint: Text(localizations.selection),
-                items: [
-                  DropdownMenuItem(
-                      value: 'apple', child: Text(localizations.apple)),
-                  DropdownMenuItem(
-                      value: 'tomato', child: Text(localizations.tomato)),
-                  DropdownMenuItem(
-                      value: 'rice', child: Text(localizations.rice)),
-                  DropdownMenuItem(
-                      value: 'cotton',
-                      child: Text(
-                        localizations.cotton,
-                      )),
-                  DropdownMenuItem(
-                      value: 'cauliflower',
-                      child: Text(localizations.cauliflower)),
-                  DropdownMenuItem(
-                      value: 'maize', child: Text(localizations.maize)),
-                  DropdownMenuItem(
-                      value: 'soybean', child: Text(localizations.soyabean)),
-                  DropdownMenuItem(
-                      value: 'spinach', child: Text(localizations.spinach)),
-                  DropdownMenuItem(
-                      value: 'sugarcane', child: Text(localizations.sugarcane)),
-                  DropdownMenuItem(
-                      value: 'pomegranate',
-                      child: Text(localizations.pomegranate)),
-                ],
-                onChanged: (value) {
-                  setState(() {
-                    selectedCrop = value;
-                  });
-                },
-              ),
-              Expanded(
-                child: selectedCrop != null
-                    ? ListView(
-                        children: _getDiseaseList(selectedCrop!),
-                      )
-                    : Center(
-                        child: Text(localizations.deafult_page_5),
-                      ),
-              ),
-              SizedBox(
-                height: 80,
-              )
+          DropdownButton<String>(
+            value: selectedCrop,
+            hint: Text(localizations.selection),
+            items: [
+              DropdownMenuItem(
+                  value: 'apple', child: Text(localizations.apple)),
+              DropdownMenuItem(
+                  value: 'tomato', child: Text(localizations.tomato)),
+              DropdownMenuItem(value: 'rice', child: Text(localizations.rice)),
+              DropdownMenuItem(
+                  value: 'cotton',
+                  child: Text(
+                    localizations.cotton,
+                  )),
+              DropdownMenuItem(
+                  value: 'cauliflower', child: Text(localizations.cauliflower)),
+              DropdownMenuItem(
+                  value: 'maize', child: Text(localizations.maize)),
+              DropdownMenuItem(
+                  value: 'soybean', child: Text(localizations.soyabean)),
+              DropdownMenuItem(
+                  value: 'spinach', child: Text(localizations.spinach)),
+              DropdownMenuItem(
+                  value: 'sugarcane', child: Text(localizations.sugarcane)),
+              DropdownMenuItem(
+                  value: 'pomegranate', child: Text(localizations.pomegranate)),
             ],
+            onChanged: (value) {
+              setState(() {
+                selectedCrop = value;
+              });
+            },
           ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Container(
-              margin: const EdgeInsets.only(bottom: 65, right: 10),
-              child: Image.asset(
-                'assets/images/fertilizer.png', // Replace with your image path
-                width: 125,
-                height: 125,
-              ),
-            ),
+          Expanded(
+            child: selectedCrop != null
+                ? ListView(
+                    children: _getDiseaseList(selectedCrop!),
+                  )
+                : Center(
+                    child: Text(localizations.deafult_page_5),
+                  ),
           ),
+          const SizedBox(
+            height: 10,
+          )
         ],
       ),
     );
@@ -267,18 +249,24 @@ class _PreventionpageState extends State<Preventionpage> {
 
   Widget _buildDiseaseTile(String diseaseName, String preventionMethods) {
     return Container(
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [Colors.white, Color(0xFF2A9F5D)],
-              begin: Alignment.centerLeft),
+      decoration: const BoxDecoration(
+          //gradient: LinearGradient(colors: [Colors.white, Color(0xFF2A9F5D)],begin: Alignment.centerLeft),
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Card(
-        color: Colors.transparent,
-        margin: EdgeInsets.all(5.0),
+        color: Colors.white,
+        shadowColor: Colors.grey.shade700,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+            side: const BorderSide(color: Colors.black12, width: 2)),
+        margin: const EdgeInsets.all(5.0),
         child: ListTile(
           title: Text(
             diseaseName,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                fontFamily: "Mergeone",
+                color: Color(0xFF2A9F5D)),
           ),
           subtitle:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

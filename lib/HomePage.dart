@@ -2,8 +2,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:sih_shetkari/DiseaseDetection.dart';
 import 'dart:io';
 import 'package:sih_shetkari/DiseaseInfoPage.dart';
+import 'package:sih_shetkari/DiseasePrediction.dart';
 import 'package:sih_shetkari/GovtSchemas.dart';
 import 'package:sih_shetkari/HelpPage.dart';
 import 'package:sih_shetkari/Language_provider.dart';
@@ -29,9 +31,8 @@ class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
   final List<Widget> pages = [
     const HomePage(),
-    Diseaseinfopage(
-        imageURL:
-            "https://icons.veryicon.com/png/o/education-technology/alibaba-cloud-iot-business-department/image-load-failed.png"),
+    DiseaseInfoPage(),
+    DiseasePrediction(),
     const Preventionpage(),
     VoiceAssistantPage(),
     FarmDetails(),
@@ -40,6 +41,7 @@ class _HomePageState extends State<HomePage> {
   final List<IconData> icons = [
     Icons.home,
     Icons.agriculture,
+    Icons.online_prediction,
     Icons.medical_information,
     Icons.mic,
     Icons.recommend,
@@ -229,82 +231,51 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(
-              height: 10,
-            ),
-
-            //Upload Text
-            Text(
-              "Upload a Picture from: ",
-              style: TextStyle(
-                  fontFamily: "Merriweather",
-                  fontSize: 20,
-                  color: Colors.black),
-            ),
-
-            //Camera Button
-            SizedBox(
-              height: 15,
-            ),
-            GestureDetector(
-              onTap: () {
-                _pickImage();
-              },
-              child: Container(
-                width: 350,
-                height: 65,
-                decoration: BoxDecoration(
-                    color: Color(0xFF2A9F5D).withOpacity(0.5),
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    border: Border.all(color: Colors.black, width: 2)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.camera),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "Camera",
-                      style: TextStyle(
-                          fontFamily: "Merriweather",
-                          fontSize: 18,
-                          color: Colors.black),
-                    )
-                  ],
-                ),
-              ),
-            ),
-
-            //Gallery Button
-            SizedBox(
               height: 20,
             ),
-            GestureDetector(
-              onTap: () {
-                _captureImage();
-              },
-              child: Container(
-                width: 350,
-                height: 65,
-                decoration: BoxDecoration(
-                    color: Color(0xFF2A9F5D).withOpacity(0.5),
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    border: Border.all(color: Colors.black, width: 2)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.browse_gallery),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "Gallery",
-                      style: TextStyle(
-                          fontFamily: "Merriweather",
+
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: GestureDetector(
+                onTap: () {
+                  // Navigate to the target page on tap
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const DiseaseDetection()),
+                  );
+                },
+                child: Container(
+                  width: double.infinity, // You can adjust the width
+                  height: 175, // You can adjust the height
+                  decoration: BoxDecoration(
+                    color: Colors.green
+                        .withOpacity(0.5), // Green background with opacity
+                    border: Border.all(
+                        color: Colors.black, width: 2), // Black border
+                    borderRadius: BorderRadius.circular(10), // Rounded corners
+                  ),
+                  child: const Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.center, // Center the content
+                    children: [
+                      Icon(
+                        Icons.upload_file, // Upload icon
+                        color: Colors.black,
+                        size: 30,
+                      ),
+                      SizedBox(width: 10), // Space between the icon and text
+                      Text(
+                        'Upload an Image',
+                        style: TextStyle(
+                          color: Colors.black,
                           fontSize: 18,
-                          color: Colors.black),
-                    )
-                  ],
+                          fontFamily:
+                              'Merriweather', // You can change the font family
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -315,100 +286,6 @@ class _HomePageState extends State<HomePage> {
         Align(alignment: Alignment.bottomCenter, child: _navBar())
       ],
     ));
-  }
-
-  String _disease = '';
-  XFile? _image;
-  final ImagePicker _picker = ImagePicker();
-
-  // Future<void> takefromcamera() async {
-  //   final XFile? pickedImage =
-  //       await _picker.pickImage(source: ImageSource.gallery);
-  //   String? imageURL = await uploadToCloudinary(pickedImage as File);
-
-  //   if (imageURL != null) {
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //         builder: (context) => Diseaseinfopage(
-  //           imageURL: imageURL,
-  //         ),
-  //       ),
-  //     );
-  //   } else {
-  //     print("Image upload failed");
-  //   }
-  // }
-
-  // Future<void> takefromgallery() async {
-  //   final XFile? pickedImage =
-  //       await _picker.pickImage(source: ImageSource.gallery);
-  //   String? imageURL = await uploadToCloudinary(pickedImage as File);
-
-  //   if (imageURL != null) {
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //         builder: (context) => Diseaseinfopage(
-  //           imageURL: imageURL,
-  //         ),
-  //       ),
-  //     );
-  //   } else {
-  //     print("Image upload failed");
-  //   }
-  // }
-
-  Future<void> _pickImage() async {
-    final XFile? pickedImage =
-        await _picker.pickImage(source: ImageSource.gallery);
-    String? imageUrl = await uploadToCloudinary(pickedImage as File);
-    setState(() {
-      //_disease = predictDisease();
-      _image = pickedImage;
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Diseaseinfopage(
-              imageURL: imageUrl as String,
-            ),
-          ));
-    });
-  }
-
-  // Method to capture an image using the camera
-  Future<void> _captureImage() async {
-    final XFile? capturedImage =
-        await _picker.pickImage(source: ImageSource.camera);
-    String? imageUrl = await uploadToCloudinary(capturedImage as File);
-    setState(() {
-      //_disease = predictDisease();
-      _image = capturedImage;
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Diseaseinfopage(
-              imageURL: imageUrl as String,
-            ),
-          ));
-    });
-  }
-
-  Future<String> sendImageToApi(File image) async {
-    // Replace <your-local-ip> and <port> with actual values
-    Uri uri = Uri.parse('http://192.168.1.105:5000/predict');
-
-    var request = http.MultipartRequest('POST', uri)
-      ..files.add(await http.MultipartFile.fromPath('file', image.path));
-
-    var response = await request.send();
-
-    if (response.statusCode == 200) {
-      var responseBody = await response.stream.bytesToString();
-      return responseBody; // Assuming the response is the disease prediction
-    } else {
-      return 'Error: ${response.statusCode}';
-    }
   }
 
   Widget _navBar() {
