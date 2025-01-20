@@ -70,19 +70,20 @@ class _DiseaseInfoPageState extends State<DiseaseInfoPage> {
     });
 
     try {
-      // API Endpoint
-      var url = Uri.parse('$baseUrl/health_status');
+      print("Uploading image...");
 
-      // Create a multipart request
+      var url = Uri.parse('$baseUrl/health_status');
       var request = http.MultipartRequest('POST', url);
       request.files.add(await http.MultipartFile.fromPath(
         'image',
         _selectedImage!.path,
       ));
 
-      // Send the request and wait for a response
       var response = await request.send();
       var responseData = await http.Response.fromStream(response);
+
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${responseData.body}');
 
       if (response.statusCode == 200) {
         var jsonResponse = json.decode(responseData.body);
@@ -90,13 +91,23 @@ class _DiseaseInfoPageState extends State<DiseaseInfoPage> {
         setState(() {
           _predictedHpi = jsonResponse['predicted_hpi']?.toDouble();
           _healthStatus = jsonResponse['health_status'];
-          _spectralImagePath = '$baseUrl${jsonResponse['spectral_image']}';
+
+          if (jsonResponse['spectral_image'] != null) {
+            _spectralImagePath =
+                Uri.parse('$baseUrl${jsonResponse['spectral_image']}')
+                    .toString();
+            print('Spectral image path: $_spectralImagePath');
+          } else {
+            print('Spectral image key is missing or null');
+            _spectralImagePath = null;
+          }
         });
       } else {
         throw Exception(
             'Failed to upload image. Status code: ${response.statusCode}');
       }
     } catch (e) {
+      print("Error occurred: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: $e')),
       );
@@ -128,151 +139,145 @@ class _DiseaseInfoPageState extends State<DiseaseInfoPage> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text("NDVI Test (Normalized Difference Vegetation Index):",
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: "Merriweather",
-                        fontWeight: FontWeight.w700)),
-                Text(
-                    "The NDVI test is a method used to assess plant health by analyzing the difference between visible (red) and near-infrared (NIR) light reflected by vegetation. Healthy plants reflect more NIR and less red light, resulting in higher NDVI values (close to 1), while stressed or diseased plants reflect less NIR and have lower NDVI values (close to -1). It helps monitor crop health, detect diseases, and manage agricultural practices effectively.",
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontFamily: "Mergeone",
-                      fontWeight: FontWeight.normal,
-                    )),
-                SizedBox(
-                  height: 5,
-                ),
-                Text("HPI (Health Plant Index):",
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: "Merriweather",
-                        fontWeight: FontWeight.w700)),
-                Text(
-                    "The Health Plant Index (HPI) quantifies the overall health status of plants based on image data, typically measuring attributes like leaf color, texture, or structural integrity. In diseased plants, the HPI tends to be lower due to discoloration, spots, or damage caused by pests or diseases. HPI helps categorize plant health into levels like \"Poor,\" \"Moderate,\" \"Good,\" or \"Excellent,\" aiding in early detection and intervention for crop management.",
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontFamily: "Mergeone",
-                      fontWeight: FontWeight.normal,
-                    )),
-              ],
-            ),
-            if (_selectedImage != null)
-              Image.file(
-                _selectedImage!,
-                height: 200,
-              ),
-            const SizedBox(height: 10),
-            Center(
-              child: ElevatedButton(
-                onPressed: _pickImage,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2A9F5D),
-                  iconColor: Colors.white,
-                ),
-                child: const Text(
-                  'Select Image',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: "Mergeone",
-                    fontWeight: FontWeight.normal,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Center(
-              child: ElevatedButton(
-                onPressed: _uploadImage,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2A9F5D),
-                  iconColor: Colors.white,
-                ),
-                child: const Text(
-                  'Upload and Analyze',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: "Mergeone",
-                    fontWeight: FontWeight.normal,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            if (_isLoading) const CircularProgressIndicator(),
-            if (_healthStatus != null)
-              Column(
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Health Status: $_healthStatus',
-                      style: const TextStyle(
+                  Text("NDVI Test (Normalized Difference Vegetation Index):",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontFamily: "Merriweather",
+                          fontWeight: FontWeight.w700,
+                          color: Color.fromARGB(255, 2, 85, 56))),
+                  Text(
+                      "The NDVI test is a method used to assess plant health by analyzing the difference between visible (red) and near-infrared (NIR) light reflected by vegetation. Healthy plants reflect more NIR and less red light, resulting in higher NDVI values (close to 1), while stressed or diseased plants reflect less NIR and have lower NDVI values (close to -1). It helps monitor crop health, detect diseases, and manage agricultural practices effectively.",
+                      style: TextStyle(
                         fontSize: 14,
                         fontFamily: "Mergeone",
                         fontWeight: FontWeight.normal,
                       )),
-                  Text('Predicted HPI: ${_predictedHpi?.toStringAsFixed(2)}%',
-                      style: const TextStyle(
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text("HPI (Health Plant Index):",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontFamily: "Merriweather",
+                          fontWeight: FontWeight.w700,
+                          color: Color.fromARGB(255, 2, 85, 56))),
+                  Text(
+                      "The Health Plant Index (HPI) quantifies the overall health status of plants based on image data, typically measuring attributes like leaf color, texture, or structural integrity. In diseased plants, the HPI tends to be lower due to discoloration, spots, or damage caused by pests or diseases. HPI helps categorize plant health into levels like \"Poor,\" \"Moderate,\" \"Good,\" or \"Excellent,\" aiding in early detection and intervention for crop management.",
+                      style: TextStyle(
                         fontSize: 14,
                         fontFamily: "Mergeone",
                         fontWeight: FontWeight.normal,
                       )),
-                  if (_spectralImagePath != null)
-                    Column(
-                      children: [
-                        const SizedBox(height: 16),
-                        const Text('Spectral Image:',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: "Mergeone",
-                              fontWeight: FontWeight.normal,
-                            )),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              border: Border.all(
-                                color: Colors.black,
-                                width: 2,
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.shade900.withOpacity(0.5),
-                                  blurRadius: 1,
-                                  spreadRadius: 5,
-                                  offset: const Offset(0, 4),
-                                ),
-                              ],
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(25),
-                              child: Image.network(
-                                _spectralImagePath!,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return const Text(
-                                    'Failed to load spectral image.',
-                                    style: TextStyle(color: Colors.red),
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
+                  const SizedBox(
+                    height: 10,
+                  )
+                ],
+              ),
+              if (_selectedImage != null)
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: 300,
+                    height: 300,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 2,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.shade900.withOpacity(0.5),
+                          blurRadius: 1,
+                          spreadRadius: 5,
+                          offset: const Offset(0, 4),
                         ),
                       ],
                     ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(25),
+                      child: Image.file(
+                        _selectedImage!,
+                        height: 200,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: _pickImage,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF2A9F5D),
+                      iconColor: Colors.white,
+                    ),
+                    child: const Text(
+                      'Select Image',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: "Mergeone",
+                        fontWeight: FontWeight.normal,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  ElevatedButton(
+                    onPressed: _uploadImage,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF2A9F5D),
+                      iconColor: Colors.white,
+                    ),
+                    child: const Text(
+                      'Upload and Analyze',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: "Mergeone",
+                        fontWeight: FontWeight.normal,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                 ],
               ),
-          ],
+              const SizedBox(height: 10),
+              if (_isLoading) const CircularProgressIndicator(),
+              if (_healthStatus != null)
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text('Health Status: $_healthStatus',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontFamily: "Mergeone",
+                          fontWeight: FontWeight.bold,
+                        )),
+                    Text('Predicted HPI: ${_predictedHpi?.toStringAsFixed(2)}%',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontFamily: "Mergeone",
+                          fontWeight: FontWeight.bold,
+                        )),
+                  ],
+                ),
+            ],
+          ),
         ),
       ),
     );

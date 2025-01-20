@@ -31,12 +31,12 @@ class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
   final List<Widget> pages = [
     const HomePage(),
-    DiseaseInfoPage(),
+    const DiseaseInfoPage(),
     DiseasePrediction(),
     const Preventionpage(),
     VoiceAssistantPage(),
     FarmDetails(),
-    GovtschemasPage()
+    const GovtschemasPage()
   ];
   final List<IconData> icons = [
     Icons.home,

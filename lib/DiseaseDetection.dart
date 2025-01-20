@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
-import 'package:sih_shetkari/HomePage.dart';
 
 class DiseaseDetection extends StatefulWidget {
   const DiseaseDetection({super.key});
@@ -21,7 +20,6 @@ class _DiseaseDetectionState extends State<DiseaseDetection> {
 
   final String baseUrl = 'https://crop-disease-detector-gg0o.onrender.com/';
 
-  /// Function to pick an image from the camera
   Future<void> _pickImageFromCamera() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.camera);
     setState(() {
@@ -29,7 +27,6 @@ class _DiseaseDetectionState extends State<DiseaseDetection> {
     });
   }
 
-  /// Function to pick an image from the gallery
   Future<void> _pickImageFromGallery() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     setState(() {
@@ -37,7 +34,6 @@ class _DiseaseDetectionState extends State<DiseaseDetection> {
     });
   }
 
-  /// Function to upload the image to the server
   Future<void> _uploadImage() async {
     if (_image == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -51,30 +47,43 @@ class _DiseaseDetectionState extends State<DiseaseDetection> {
     });
 
     try {
-      // API Endpoint
-      final url = Uri.parse('$baseUrl/predict');
+      print("Uploading image...");
 
-      // Create a multipart request
+      final url = Uri.parse('$baseUrl/predict');
       final request = http.MultipartRequest('POST', url);
+
+      // Update 'file' to the expected field name from the backend
       request.files.add(await http.MultipartFile.fromPath(
-        'image',
+        'file', // Replace with the correct field name, e.g., 'image', 'photo'
         _image!.path,
       ));
 
-      // Send the request and get the response
       final response = await request.send();
       final responseData = await http.Response.fromStream(response);
+
+      print("Response status: ${response.statusCode}");
+      print("Response body: ${responseData.body}");
 
       if (response.statusCode == 200) {
         final jsonResponse = jsonDecode(responseData.body);
 
-        setState(() {
-          _diseaseName = jsonResponse['disease-name'];
-        });
+        if (jsonResponse.containsKey('predicted_disease')) {
+          setState(() {
+            _diseaseName = jsonResponse['predicted_disease'];
+          });
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Unexpected server response')),
+          );
+          print("Unexpected response format: ${responseData.body}");
+        }
       } else {
-        throw Exception('Failed to load. Status code: ${response.statusCode}');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: ${response.statusCode}')),
+        );
       }
     } catch (e) {
+      print("Error occurred: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: $e')),
       );
@@ -89,7 +98,7 @@ class _DiseaseDetectionState extends State<DiseaseDetection> {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     if (localizations == null) {
-      return const Text('Localization not available'); // Fallback text
+      return const Text('Localization not available');
     }
 
     return Scaffold(
@@ -97,10 +106,7 @@ class _DiseaseDetectionState extends State<DiseaseDetection> {
         backgroundColor: Colors.grey.withOpacity(0.5),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const HomePage()),
-          ),
+          onPressed: () => Navigator.pop(context),
         ),
         title: Center(
           child: Text(
@@ -134,11 +140,7 @@ class _DiseaseDetectionState extends State<DiseaseDetection> {
               label: const Text(
                 "Click an Image from Camera",
                 style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: "Mergeone",
-                  fontWeight: FontWeight.normal,
-                  color: Colors.white,
-                ),
+                    fontFamily: "Mergeone", fontSize: 16, color: Colors.white),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF2A9F5D),
@@ -152,18 +154,29 @@ class _DiseaseDetectionState extends State<DiseaseDetection> {
               label: const Text(
                 "Upload an Image from Gallery",
                 style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: "Mergeone",
-                  fontWeight: FontWeight.normal,
-                  color: Colors.white,
-                ),
+                    fontFamily: "Mergeone", fontSize: 16, color: Colors.white),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF2A9F5D),
                 iconColor: Colors.white,
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(
+              height: 10,
+            ),
+            ElevatedButton.icon(
+              onPressed: _uploadImage,
+              label: const Text(
+                "Submit",
+                style: TextStyle(
+                    fontFamily: "Mergeone", fontSize: 16, color: Colors.white),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF2A9F5D),
+                iconColor: Colors.white,
+              ),
+            ),
+            const SizedBox(height: 5),
             if (_isLoading)
               const CircularProgressIndicator()
             else if (_diseaseName != null)
@@ -179,7 +192,7 @@ class _DiseaseDetectionState extends State<DiseaseDetection> {
                   ),
                 ),
               ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 5),
             if (_image != null)
               Padding(
                 padding: const EdgeInsets.all(8.0),
